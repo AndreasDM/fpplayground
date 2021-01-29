@@ -160,4 +160,14 @@ auto curry(std::function<R(Arg, Args...)> f)
     };
 }
 
+template <typename F, typename G>
+auto operator <=> (F&& f, G&& g)
+{
+  return [f = std::forward<F>(f), g = std::forward<G>(g)](auto x) {
+    return f(g(x));
+  };
+}
+
+#define · <=>
+
 #endif // FP_H
