@@ -54,8 +54,8 @@ struct Applicative2<std::vector> : Functor2<std::vector> {
   static auto liftA2(F&& f, std::vector<T> a, std::vector<U> b) -> std::vector<std::result_of_t<F(T,U)>>
   {
     std::vector<std::result_of_t<F(T,U)>> res;
-    for (auto const& i : a)
-      for (auto const& j : b)
+    for ([[maybe_unused]]auto const& i : a)
+      for ([[maybe_unused]]auto const& j : b)
         res.emplace_back(f(a, b));
     return res;
   }
